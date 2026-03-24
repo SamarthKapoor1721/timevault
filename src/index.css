@@ -1,0 +1,146 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Global Resets ─── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #04050a;
+  color: #c8d6f0;
+  font-family: 'IBM Plex Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ─── Scrollbar Styling ─── */
+::-webkit-scrollbar        { width: 6px; }
+::-webkit-scrollbar-track  { background: #04050a; }
+::-webkit-scrollbar-thumb  { background: #1a2035; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #00d4ff44; }
+
+/* ─── Custom Utility Classes ─── */
+@layer components {
+  /* Glowing cyan border panel */
+  .panel {
+    @apply bg-panel border border-border rounded-xl;
+    box-shadow: 0 0 0 1px rgba(0, 212, 255, 0.05), inset 0 1px 0 rgba(255,255,255,0.03);
+  }
+
+  /* Glowing accent button */
+  .btn-primary {
+    @apply font-mono text-sm font-bold tracking-wider uppercase
+           px-6 py-3 rounded-lg
+           bg-accent/10 border border-accent/50 text-accent
+           hover:bg-accent/20 hover:border-accent hover:shadow-lg
+           transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed;
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.1);
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    box-shadow: 0 0 30px rgba(0, 212, 255, 0.25);
+  }
+
+  /* Gold "send" button */
+  .btn-gold {
+    @apply font-mono text-sm font-bold tracking-wider uppercase
+           px-6 py-3 rounded-lg
+           bg-gold/10 border border-gold/50 text-gold
+           hover:bg-gold/20 hover:border-gold
+           transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed;
+  }
+
+  /* Danger button */
+  .btn-danger {
+    @apply font-mono text-sm font-bold tracking-wider uppercase
+           px-6 py-3 rounded-lg
+           bg-danger/10 border border-danger/50 text-danger
+           hover:bg-danger/20 hover:border-danger
+           transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed;
+  }
+
+  /* Input fields */
+  .input-field {
+    @apply w-full bg-void border border-border rounded-lg px-4 py-3
+           text-text font-body placeholder-muted/50
+           focus:outline-none focus:border-accent/60 focus:ring-1 focus:ring-accent/20
+           transition-all duration-200;
+  }
+
+  /* Label style */
+  .field-label {
+    @apply block text-xs font-mono font-bold tracking-widest uppercase text-muted mb-2;
+  }
+
+  /* Status badge — locked */
+  .badge-locked {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full
+           bg-danger/10 border border-danger/30 text-danger text-xs font-mono font-bold;
+  }
+
+  /* Status badge — unlocked */
+  .badge-unlocked {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full
+           bg-success/10 border border-success/30 text-success text-xs font-mono font-bold;
+  }
+}
+
+/* ─── Animated Grid Background ─── */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ─── Glow Text ─── */
+.glow-text {
+  text-shadow: 0 0 20px rgba(0, 212, 255, 0.7), 0 0 40px rgba(0, 212, 255, 0.4);
+}
+
+/* ─── Countdown digits ─── */
+.countdown-digit {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  color: #00d4ff;
+  text-shadow: 0 0 10px rgba(0, 212, 255, 0.8);
+}
+
+/* ─── Textarea ─── */
+textarea.input-field {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* ─── Loading spinner ─── */
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(0, 212, 255, 0.2);
+  border-top-color: #00d4ff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ─── Page transition ─── */
+.page-enter {
+  animation: slideUp 0.4s ease forwards;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
